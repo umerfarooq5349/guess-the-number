@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@react-hook/window-size"; // To get window dimensions for confetti
+import { generateRandomNumbers } from "@/utils/generateRandomNumber";
 
 const NumberGuessingGame = () => {
   const [width, height] = useWindowSize(); // Get the window size for full-screen confetti
-  const [targetNumber, setTargetNumber] = useState(generateRandomNumber());
+  const [targetNumber, setTargetNumber] = useState(generateRandomNumbers());
   const [userGuess, setUserGuess] = useState("");
   const [attemptsLeft, setAttemptsLeft] = useState(10);
   const [currentScore, setCurrentScore] = useState(0);
@@ -14,18 +15,13 @@ const NumberGuessingGame = () => {
   const [gameOver, setGameOver] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
-  // Helper function to generate random number
-  function generateRandomNumber() {
-    return Math.floor(Math.random() * 100) + 1;
-  }
-
   useEffect(() => {
     console.log("Target number (for debugging):", targetNumber);
   }, [targetNumber, attemptsLeft]);
 
   // Function to handle guess input
   const handleGuess = () => {
-    const guess = parseInt(userGuess, 10);
+    const guess = parseInt(userGuess);
     if (isNaN(guess) || gameOver) return;
 
     // Check if guess is correct
@@ -55,7 +51,7 @@ const NumberGuessingGame = () => {
 
   // Reset the game for a new round
   const handlePlayAgain = () => {
-    setTargetNumber(generateRandomNumber());
+    setTargetNumber(generateRandomNumbers());
     setUserGuess("");
     setAttemptsLeft(10);
     setCurrentScore(0);

@@ -9,7 +9,7 @@ const SigninPage = () => {
 
   useEffect(() => {
     const message = searchParams.get("message");
-    searchParams.get("");
+
     if (message) {
       setMessage(message);
     }
