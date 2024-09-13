@@ -2,36 +2,22 @@ import { NextFunction, Request, Response } from "express";
 import catchAsync from "../utils/catchAsync";
 import AppError from "./appErros";
 import Player from "../model/players_model";
+import { sendResponce } from "../utils/sendResponce";
 
 // Update Player's High Score
-export const updateHighScore = catchAsync(
+export const highScore = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { playerId } = req.params;
-    const { highestScore } = req.body;
-
     // Find the player by ID
-    const player = await Player.findById(playerId);
+    const highestScore = await Player.find({}, "name highestScore lastPlayed")
+      .sort({ highestScore: -1 })
+      .limit(20);
 
     // If player not found, return an error
-    if (!player) {
-      return next(new AppError("Player not found", 404));
+    if (!highestScore) {
+      return next(new AppError("Error fetching data", 500));
     }
 
-    console.log(`High`);
-    // Update player's highest score if the new score is higher
-    if (highestScore > player.highestScore) {
-      player.highestScore = highestScore;
-    }
-
-    await player.updateOne({ new: true });
-
-    res.status(200).json({
-      status: "success",
-      message: "Highest score updated successfully",
-      data: {
-        player,
-      },
-    });
+    sendResponce(res, 200, "success", "Our best players", highestScore);
   }
 );
 
@@ -62,12 +48,6 @@ export const addScore = catchAsync(
 
     await player.save();
 
-    res.status(200).json({
-      status: "success",
-      message: "Score added successfully",
-      data: {
-        player,
-      },
-    });
+    sendResponce(res, 200, "success", "Score updated successfully", player);
   }
 );
