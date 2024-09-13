@@ -22,15 +22,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           let user = null;
           const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER}/login`,
+            `${process.env.NEXT_PUBLIC_SERVER}/signin`,
             {
               email: credentials?.email,
               password: credentials?.password,
             }
           );
-          user = response.data.data.user;
+          console.log(response.data.data.player);
+          user = response.data.data.player;
 
-          if (response.status === 200 && response.data.data.user) {
+          if (response.status === 200 && response.data.data.player) {
             return user;
           } else {
             return null;

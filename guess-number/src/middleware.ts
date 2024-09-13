@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
       url.pathname.startsWith("/signup")
     ) {
       // Redirect authenticated users away from signin/signup with a message
-      const redirectUrl = new URL("/signin", request.url);
+      const redirectUrl = new URL("/", request.url);
       redirectUrl.searchParams.set("message", "You are already logged in.");
       return NextResponse.redirect(redirectUrl);
     }
@@ -63,6 +63,7 @@ export const config = {
     "/rules",
     "/profile",
     "/guess",
+    "/",
     "/highestScore",
   ], // Match the required routes
 };

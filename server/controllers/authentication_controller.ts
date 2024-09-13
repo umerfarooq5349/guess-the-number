@@ -79,7 +79,7 @@ const login = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     // Extract email and password from the request body
     const { email, password } = req.body;
-
+    console.log(email, password);
     // Check if email and password are provided
     if (!email || !password) {
       return next(new AppError("Please provide email and password", 400));
@@ -92,7 +92,7 @@ const login = catchAsync(
     if (!player || !(await player.checkPassword(password, player.password!))) {
       return next(new AppError("Invalid email or password", 401));
     }
-
+    console.log(player);
     // Send the token back to the client
     createSendToken(player, 200, res);
   }
