@@ -68,9 +68,9 @@ const signUp = catchAsync(
       email: req.body.email,
       password: req.body.password,
     });
-
-    // Send the token back to the client
     createSendToken(newplayer, 201, res);
+    console.log(createSendToken(newplayer, 201, res));
+    // Send the token back to the client
   }
 );
 

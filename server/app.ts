@@ -3,6 +3,7 @@ import cors from "cors";
 import { errorHandlerMiddleware } from "./controllers/errors";
 import authRouter from "./routes/auth";
 import cookieParser from "cookie-parser";
+import gameRouter from "./routes/game";
 const app = Express();
 
 const corsOptions = {
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", authRouter);
+app.use("/api", gameRouter);
 
 app.use(errorHandlerMiddleware);
 
