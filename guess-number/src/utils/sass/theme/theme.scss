@@ -1,0 +1,282 @@
+// Color Palette
+$primary-color: #041c32; // Dark Blue
+$secondary-color: #04293a; // Darker Teal
+$accent-color: #064663; // Teal
+$highlight-color: #ecb365; // Light Gold
+
+// Danger and Success Colors
+$danger-color: #e74c3c; // Red for danger
+$success-color: #2ecc71; // Green for success
+$danger-light-color: lighten($danger-color, 20%);
+$success-light-color: lighten($success-color, 20%);
+
+// Text Colors
+$text-color-dark: $primary-color;
+$text-color-light: $highlight-color;
+$text-color-accent: $accent-color;
+$text-color-secondary: $secondary-color;
+
+// Background Colors
+$background-color-dark: $primary-color;
+$background-color-light: $highlight-color;
+$background-accent: $secondary-color;
+// $background-alt-500: $accent-color-low;
+$background-alt: $accent-color;
+$form-bg-color: $accent-color;
+
+// Button Colors
+$button-color-primary: $primary-color;
+$button-color-secondary: $secondary-color;
+$button-color-accent: $accent-color;
+$button-color-light: $highlight-color;
+$button-color-danger: $danger-color;
+$button-color-success: $success-color;
+
+// Border Colors
+$border-color-dark: $primary-color;
+$border-color-light: $highlight-color;
+$border-color-accent: $accent-color;
+
+// Input Colors
+$input-background: $background-color-light;
+$input-border: $border-color-accent;
+$input-text-color: $text-color-dark;
+$input-placeholder-color: lighten($primary-color, 20%);
+
+// Link Colors
+$link-color: $accent-color;
+$link-hover-color: $highlight-color;
+$link-active-color: darken($highlight-color, 10%);
+
+// Shadow
+$box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-dark: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+// Transition
+$transition-speed: 0.3s;
+$transition-ease: ease-in-out;
+
+// Border Radius
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$border-radius-large: 12px;
+
+// Font Family
+$font-family: "Roboto", sans-serif;
+
+// Font Sizes
+$font-size-small: 12px;
+$font-size-regular: 16px;
+$font-size-large: 24px;
+$font-size-heading: 32px;
+$font-size-hero: 48px;
+
+// Padding and Margin
+$padding-small: 8px;
+$padding-regular: 16px;
+$padding-large: 24px;
+
+$margin-small: 8px;
+$margin-regular: 16px;
+$margin-large: 24px;
+
+$gap-small: 8px;
+$gap-regular: 16px;
+$gap-large: 24px;
+
+// Button Styles Map
+$button-styles: (
+  primary: (
+    background-color: none,
+    border: 2px solid $button-color-primary,
+    outline: none,
+    color: $text-color-light,
+    font-size: $font-size-regular,
+    // box-shadow: $box-shadow-light,
+    hover-background-color: $button-color-primary,
+    hover-box-shadow: $box-shadow-dark,
+    active-background-color: $button-color-accent,
+    disabled-background-color: darken($button-color-accent, 5%),
+    disabled-color: $text-color-light,
+  ),
+  secondary: (
+    background-color: $button-color-secondary,
+    border: none,
+    outline: none,
+    font-size: $font-size-regular,
+    color: $text-color-light,
+    box-shadow: $box-shadow-light,
+    hover-background-color: $button-color-accent,
+    hover-box-shadow: $box-shadow-dark,
+    active-background-color: darken($button-color-secondary, 10%),
+    disabled-background-color: lighten($button-color-primary, 20%),
+    disabled-color: $text-color-accent,
+  ),
+  danger: (
+    background-color: $button-color-danger,
+
+    color: $text-color-light,
+    box-shadow: $box-shadow-light,
+    border: none,
+    outline: none,
+    hover-background-color: darken($button-color-danger, 10%),
+    hover-box-shadow: $box-shadow-dark,
+    active-background-color: darken($button-color-danger, 10%),
+    disabled-background-color: lighten($button-color-danger, 30%),
+    disabled-color: $text-color-light,
+  ),
+  success: (
+    background-color: $button-color-success,
+    color: $text-color-light,
+    border: none,
+    outline: none,
+    box-shadow: $box-shadow-light,
+    hover-background-color: lighten($button-color-success, 10%),
+    hover-box-shadow: $box-shadow-dark,
+    active-background-color: darken($button-color-success, 10%),
+    disabled-background-color: lighten($button-color-success, 30%),
+    disabled-color: $text-color-light,
+  ),
+);
+
+// Link Styles Map
+$link-styles: (
+  default: (
+    color: $link-color,
+
+    hover-color: $link-hover-color,
+    active-color: $link-active-color,
+  ),
+  danger: (
+    color: $danger-color,
+    hover-color: lighten($danger-color, 20%),
+    active-color: darken($danger-color, 10%),
+  ),
+  success: (
+    color: $success-color,
+    hover-color: lighten($success-color, 20%),
+    active-color: darken($success-color, 10%),
+  ),
+);
+
+// Input Styles Map
+$input-styles: (
+  default: (
+    background-color: $input-background,
+    border: 1px solid $input-border,
+    color: $input-text-color,
+    placeholder-color: $input-placeholder-color,
+  ),
+  danger: (
+    background-color: $danger-light-color,
+    border: 1px solid $danger-color,
+    color: $danger-color,
+    placeholder-color: lighten($danger-color, 30%),
+  ),
+  success: (
+    background-color: $success-light-color,
+    border: 1px solid $success-color,
+    color: $success-color,
+    placeholder-color: lighten($success-color, 30%),
+  ),
+);
+
+// Hero Styles Map
+$hero-styles: (
+  default: (
+    background-color: $background-alt,
+    color: $text-color-accent,
+    font-size: $font-size-hero,
+    padding: $padding-large,
+    text-align: center,
+    border-radius: $border-radius-large,
+  ),
+  danger: (
+    background-color: $danger-color,
+    color: $text-color-light,
+    font-size: $font-size-hero,
+    padding: $padding-large,
+    text-align: center,
+    border-radius: $border-radius-large,
+  ),
+  success: (
+    background-color: $success-color,
+    color: $text-color-light,
+    font-size: $font-size-hero,
+    padding: $padding-large,
+    text-align: center,
+    border-radius: $border-radius-large,
+  ),
+);
+
+// Mixin for Button Styles
+@mixin buttonStyle($type) {
+  $styles: map-get($button-styles, $type);
+  background-color: transparent;
+  border: map-get($styles, border);
+  color: map-get($styles, color);
+  // box-shadow: map-get($styles, box-shadow);
+  font-size: map-get($styles, font-size);
+  padding: $padding-regular;
+  border-radius: $border-radius-large;
+  transition: background-color $transition-speed $transition-ease,
+    box-shadow $transition-speed $transition-ease;
+  margin: $margin-small;
+  &:hover {
+    background-color: map-get($styles, hover-background-color);
+    cursor: pointer;
+    box-shadow: map-get($styles, hover-box-shadow);
+  }
+
+  &:active {
+    background-color: map-get($styles, active-background-color);
+  }
+
+  &:disabled {
+    background-color: map-get($styles, disabled-background-color);
+    color: map-get($styles, disabled-color);
+    cursor: not-allowed;
+  }
+}
+
+// Mixin for Link Styles
+@mixin linkStyle($type) {
+  $styles: map-get($link-styles, $type);
+  text-decoration: none;
+  color: map-get($styles, color);
+  transition: color $transition-speed $transition-ease;
+
+  &:hover {
+    color: map-get($styles, hover-color);
+  }
+
+  &:active {
+    color: map-get($styles, active-color);
+  }
+}
+
+// Mixin for Input Styles
+@mixin inputStyle($type) {
+  $styles: map-get($input-styles, $type);
+  background-color: map-get($styles, background-color);
+  border: map-get($styles, border);
+  color: map-get($styles, color);
+  padding: $padding-regular;
+  border-radius: $border-radius-medium;
+  transition: border-color $transition-speed $transition-ease;
+
+  &::placeholder {
+    color: map-get($styles, placeholder-color);
+  }
+}
+
+// Mixin for Hero Styles
+@mixin heroStyle($type) {
+  $styles: map-get($hero-styles, $type);
+  background-color: map-get($styles, background-color);
+  color: map-get($styles, color);
+  font-size: map-get($styles, font-size);
+  padding: map-get($styles, padding);
+  border-radius: map-get($styles, border-radius);
+  text-align: map-get($styles, text-align);
+}

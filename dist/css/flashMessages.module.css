@@ -1,0 +1,55 @@
+.default_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  text-align: center;
+  background-color: #064663;
+  color: #ecb365;
+  font-size: 24px;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  text-align: center;
+  background-color: #e74c3c;
+  color: #ecb365;
+  font-size: 24px;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.success_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  text-align: center;
+  background-color: #2ecc71;
+  color: #ecb365;
+  font-size: 24px;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}/*# sourceMappingURL=flashMessages.module.css.map */

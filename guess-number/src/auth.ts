@@ -28,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               password: credentials?.password,
             }
           );
-          console.log(response.data.data.player);
+
           user = response.data.data.player;
 
           if (response.status === 200 && response.data.data.player) {

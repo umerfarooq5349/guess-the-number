@@ -1,5 +1,16 @@
-const NavBar = () => {
-  return <div>this is navbar</div>;
+"use client";
+
+import { usePathname } from "next/navigation";
+import NavLinks from "./navLinks";
+
+const Navbar = () => {
+  const path = usePathname();
+
+  return path === "/login" || path === "/signup" ? (
+    <div> </div>
+  ) : (
+    <NavLinks></NavLinks>
+  );
 };
 
-export default NavBar;
+export default Navbar;

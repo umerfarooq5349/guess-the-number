@@ -5,6 +5,8 @@ type FlashMessageContextType = {
   message: string | null;
   setMessage: (message: string) => void;
   clearMessage: () => void;
+  messageType: string | null;
+  setMessageType: (message: string) => void;
 };
 
 const FlashMessageContext = createContext<FlashMessageContextType | undefined>(
@@ -13,11 +15,13 @@ const FlashMessageContext = createContext<FlashMessageContextType | undefined>(
 
 export const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
   const [message, setMessage] = useState<string | null>(null);
-
+  const [messageType, setMessageType] = useState<string | null>(null);
   const clearMessage = () => setMessage(null);
 
   return (
-    <FlashMessageContext.Provider value={{ message, setMessage, clearMessage }}>
+    <FlashMessageContext.Provider
+      value={{ message, setMessage, clearMessage, messageType, setMessageType }}
+    >
       {children}
     </FlashMessageContext.Provider>
   );

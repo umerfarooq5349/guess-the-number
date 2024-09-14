@@ -1,0 +1,46 @@
+.navLink {
+  text-decoration: none;
+  color: #064663;
+  transition: color 0.3s ease-in-out;
+  color: #ecb365;
+  margin: 8px 16px;
+  padding: 8px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.navLink:hover {
+  color: #ecb365;
+}
+.navLink:active {
+  color: #e69d38;
+}
+.navLink::before {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #ecb365;
+  transition: width 300ms ease-in-out;
+}
+.navLink:hover::before {
+  width: 100%;
+}
+
+.activate {
+  padding: 8px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.activate::before {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #ecb365;
+}/*# sourceMappingURL=oneLink.module.css.map */

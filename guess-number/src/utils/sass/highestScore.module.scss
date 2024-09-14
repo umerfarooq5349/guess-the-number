@@ -1,0 +1,84 @@
+// NumberGuessingGame.module.scss
+@import "./theme/theme.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  width: 80vw;
+  // padding: $padding-regular;
+
+  background-color: $background-alt;
+  box-shadow: $box-shadow-light;
+  border-radius: $border-radius-large;
+  &:hover {
+    box-shadow: $box-shadow-dark;
+  }
+  .containerHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $background-color-dark;
+    padding: $padding-regular $padding-regular;
+    border-top-left-radius: $border-radius-large;
+    border-top-right-radius: $border-radius-large;
+    box-shadow: $box-shadow-dark;
+    .subHead {
+      color: $text-color-light;
+      font-size: $font-size-regular;
+    }
+    .playAgainBtn {
+      @include linkStyle(default);
+      color: $text-color-light;
+      margin: 0;
+    }
+  }
+
+  .heading {
+    color: $text-color-dark;
+    font-size: $font-size-heading;
+  }
+  .guessBody {
+    // justify-content: space-between;
+    text-align: center;
+
+    .description {
+      color: $text-color-dark;
+      font-size: $font-size-regular;
+      font-weight: bold;
+      // box-shadow: $box-shadow-light;
+      margin: $margin-regular;
+    }
+
+    .input {
+      @include inputStyle(default);
+      margin: $margin-regular;
+
+      &:active,
+      &:focus {
+        outline: none;
+        border: $border-color-accent;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &::placeholder {
+        color: $text-color-dark;
+      }
+    }
+
+    .button {
+      @include buttonStyle(primary);
+      width: 100%;
+      max-width: 200px;
+      margin: $margin-small auto;
+    }
+  }
+}
