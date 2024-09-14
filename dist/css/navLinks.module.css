@@ -1,0 +1,51 @@
+.navbarContainer {
+  display: flex;
+  width: 100%;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.menuButton,
+.smallScreen {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbarContainer {
+    display: none;
+  }
+  .menuButton {
+    text-decoration: none;
+    color: #064663;
+    transition: color 0.3s ease-in-out;
+    border: none;
+    top: 0;
+    right: 0;
+    margin: 24px 24px;
+    position: fixed;
+    display: block;
+    outline: none;
+    background-color: transparent;
+    z-index: 1000; /* Ensure it stays on top */
+  }
+  .menuButton:hover {
+    color: #ecb365;
+  }
+  .menuButton:active {
+    color: #e69d38;
+  }
+  .smallScreen {
+    width: 50%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    background-color: black;
+    flex-direction: column;
+    justify-content: center;
+    text-align: end;
+    z-index: 999;
+    backdrop-filter: blur(4px);
+  }
+}/*# sourceMappingURL=navLinks.module.css.map */

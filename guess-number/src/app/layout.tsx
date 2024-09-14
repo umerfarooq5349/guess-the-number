@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/navbar/navbar";
+import { FlashMessageProvider } from "@/context/flashMessageContext";
+import AuthProvider from "@/context/authProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,8 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NavBar></NavBar>
-        {children}
+        <div className="container">
+          <div className="smallcontainer">
+            <AuthProvider>
+              <FlashMessageProvider>
+                <NavBar></NavBar>
+                {children}
+                <div></div>
+              </FlashMessageProvider>
+            </AuthProvider>
+          </div>
+        </div>
       </body>
     </html>
   );

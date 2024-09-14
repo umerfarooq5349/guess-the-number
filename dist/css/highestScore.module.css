@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  width: 80vw;
+  background-color: #064663;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+.container:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.container .containerHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #041c32;
+  padding: 16px 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.container .containerHeading .subHead {
+  color: #ecb365;
+  font-size: 16px;
+}
+.container .containerHeading .playAgainBtn {
+  text-decoration: none;
+  color: #064663;
+  transition: color 0.3s ease-in-out;
+  color: #ecb365;
+  margin: 0;
+}
+.container .containerHeading .playAgainBtn:hover {
+  color: #ecb365;
+}
+.container .containerHeading .playAgainBtn:active {
+  color: #e69d38;
+}
+.container .heading {
+  color: #041c32;
+  font-size: 32px;
+}
+.container .guessBody {
+  text-align: center;
+}
+.container .guessBody .description {
+  color: #041c32;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 16px;
+}
+.container .guessBody .input {
+  background-color: #ecb365;
+  border: 1px solid #064663;
+  color: #041c32;
+  padding: 16px;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out;
+  margin: 16px;
+}
+.container .guessBody .input::placeholder {
+  color: #0c5190;
+}
+.container .guessBody .input:active, .container .guessBody .input:focus {
+  outline: none;
+  border: #064663;
+}
+.container .guessBody .input::-webkit-outer-spin-button, .container .guessBody .input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.container .guessBody .input::placeholder {
+  color: #041c32;
+}
+.container .guessBody .button {
+  background-color: transparent;
+  border: 2px solid #041c32;
+  color: #ecb365;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin: 8px;
+  width: 100%;
+  max-width: 200px;
+  margin: 8px auto;
+}
+.container .guessBody .button:hover {
+  background-color: #041c32;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.container .guessBody .button:active {
+  background-color: #064663;
+}
+.container .guessBody .button:disabled {
+  background-color: #05354b;
+  color: #ecb365;
+  cursor: not-allowed;
+}/*# sourceMappingURL=highestScore.module.css.map */

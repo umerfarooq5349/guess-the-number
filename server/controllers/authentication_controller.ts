@@ -1,78 +1,100 @@
-import mongoose from "mongoose";
-import User from "../model/users_model";
+import mongoose, { plugin } from "mongoose";
+
 import catchAsync from "../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import AppError from "./appErros";
+import AppError from "./appErros"; // Ensure correct import of AppError utility
 import { signToken } from "./../utils/signinToken"; // Ensure correct import
+import Player from "./../model/players_model";
 
-interface UserDocument extends mongoose.Document {
-  _id: string;
+// Define the interface for the playerDocument, used for type safety
+interface playerDocument extends mongoose.Document {
   name: string;
   email: string;
   password?: string;
-  passwordConfirm?: string;
-  role: string;
+
   checkPassword: (
     candidatePassword: string,
-    userPassword: string
+    playerPassword: string
   ) => Promise<boolean>;
 }
 
+// Function to sign and send the JWT token along with player data
 const createSendToken = (
-  user: UserDocument,
+  player: playerDocument,
   statusCode: number,
   res: Response
 ): void => {
-  const token = signToken(user._id);
+  const token = signToken(player._id);
+
   const cookieOptions = {
-    secure: process.env.NODE_ENV === "production",
+    expires: new Date(
+      Date.now() +
+        (process.env.JWT_COOKIE_EXPIRES_IN
+          ? parseInt(process.env.JWT_COOKIE_EXPIRES_IN, 10)
+          : 7) *
+          24 *
+          60 *
+          60 *
+          1000
+    ),
+    httpOnly: true, // Ensure cookie is not accessible via JavaScript
+    secure: process.env.NODE_ENV === "production", // Set secure in production
   };
 
   res.cookie("jwt", token, cookieOptions);
 
-  // Remove password from output
-  user.password = undefined;
+  // Remove password from the response object
+  player.password = undefined;
 
   res.status(statusCode).json({
     status: "success",
     token,
     data: {
-      user,
+      player,
     },
   });
 };
 
+// Signup function to register new players
 const signUp = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    // Log request body for debugging
     console.log(req.body);
-    const newUser = await User.create({
+
+    // Create the new player
+    const newplayer = await Player.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
-      role: req.body.role,
     });
-
-    const token = createSendToken(newUser, 201, res);
+    createSendToken(newplayer, 201, res);
+    console.log(createSendToken(newplayer, 201, res));
+    // Send the token back to the client
   }
 );
 
+// Login function to authenticate existing players
 const login = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body);
+    // Extract email and password from the request body
     const { email, password } = req.body;
-
+    console.log(email, password);
+    // Check if email and password are provided
     if (!email || !password) {
       return next(new AppError("Please provide email and password", 400));
     }
 
-    const user = await User.findOne({ email }).select("+password");
-    if (!user || !(await user.checkPassword(password, user.password))) {
+    // Find the player in the database and explicitly select the password field
+    const player = await Player.findOne({ email }).select("+password");
+
+    // Check if the player exists and the password is correct
+    if (!player || !(await player.checkPassword(password, player.password!))) {
       return next(new AppError("Invalid email or password", 401));
     }
-
-    createSendToken(user, 200, res);
+    console.log(player);
+    // Send the token back to the client
+    createSendToken(player, 200, res);
   }
 );
 

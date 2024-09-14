@@ -1,0 +1,60 @@
+@import "./theme/theme.scss";
+
+.default_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  //opacity: 0;
+  text-align: center;
+  background-color: $background-alt;
+  color: $text-color-light;
+  font-size: $font-size-large;
+  width: fit-content;
+  padding: $padding-small;
+  border-radius: $border-radius-medium;
+  box-shadow: $box-shadow-light;
+}
+
+.error_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  //opacity: 0;
+  text-align: center;
+  background-color: $danger-color;
+  color: $text-color-light;
+  font-size: $font-size-large;
+  width: fit-content;
+  padding: $padding-small;
+  border-radius: $border-radius-medium;
+  box-shadow: $box-shadow-light;
+  -webkit-border-radius: $border-radius-medium;
+  -moz-border-radius: $border-radius-medium;
+  -ms-border-radius: $border-radius-medium;
+  -o-border-radius: $border-radius-medium;
+}
+
+.success_message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: auto;
+  //opacity: 0;
+  text-align: center;
+  background-color: $success-color;
+  color: $text-color-light;
+  font-size: $font-size-large;
+  width: fit-content;
+  padding: $padding-small;
+  border-radius: $border-radius-medium;
+  box-shadow: $box-shadow-light;
+  -webkit-border-radius: $border-radius-medium;
+  -moz-border-radius: $border-radius-medium;
+  -ms-border-radius: $border-radius-medium;
+  -o-border-radius: $border-radius-medium;
+}
