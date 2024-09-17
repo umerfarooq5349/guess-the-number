@@ -1,0 +1,139 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #064663;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 70%;
+  height: 70%;
+}
+
+.imageContainer {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  flex: 1;
+  background: #064663;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #ecb365;
+}
+
+.label {
+  display: block;
+  color: #ecb365;
+  margin-bottom: 8px;
+}
+
+.input {
+  background-color: #ecb365;
+  border: 1px solid #064663;
+  color: #041c32;
+  padding: 16px;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out;
+  width: 100%;
+  outline: none;
+}
+.input::placeholder {
+  color: #0c5190;
+}
+.input:active, .input:focus {
+  border: 20px solid #041c32;
+}
+.input:focus {
+  border: #064663;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: text;
+}
+.input::-webkit-outer-spin-button, .input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input::placeholder {
+  color: #041c32;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 12px;
+  display: block;
+  margin-top: 8px;
+}
+
+.submitBtn,
+.socialBtn {
+  background-color: transparent;
+  border: 2px solid #041c32;
+  color: #ecb365;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin: 8px;
+  width: 100%;
+  background-color: #041c32;
+  margin: 8px 0;
+  cursor: pointer;
+}
+.submitBtn:hover,
+.socialBtn:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.submitBtn:active,
+.socialBtn:active {
+  background-color: none;
+}
+.submitBtn:disabled,
+.socialBtn:disabled {
+  background-color: #05354b;
+  color: #ecb365;
+  border: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.socialLogin {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.footerText {
+  text-align: center;
+  color: #ecb365;
+  margin: 16px;
+}
+
+.signupLink {
+  color: #ecb365;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+.orLogin {
+  display: block;
+  text-align: center;
+  color: #ecb365;
+}/*# sourceMappingURL=login.module.css.map */

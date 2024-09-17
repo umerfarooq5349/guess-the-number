@@ -4,14 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   height: 85vh;
   width: 85vw;
   background-color: $background-alt;
   box-shadow: $box-shadow-light;
   border-radius: $border-radius-large;
-
-  position: relative;
 
   &:hover {
     box-shadow: $box-shadow-dark;
@@ -32,7 +29,6 @@
     border-top-right-radius: $border-radius-large;
     box-shadow: $box-shadow-dark;
     color: $text-color-light;
-    margin-bottom: $margin-regular;
 
     .subHead {
       display: flex;
@@ -49,67 +45,44 @@
     }
   }
 
-  .tableWrapper {
+  // New flex container for rules content
+  .content {
     display: flex;
-    flex-grow: 1;
+    flex: 1; // Makes sure this section takes all the remaining space
     justify-content: center;
     align-items: center;
     width: 100%;
   }
 
-  .tableContainer {
-    width: 80%;
-    border-radius: $border-radius-large;
+  .rulesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
+    background-color: $background-color-light;
+    padding: $padding-large;
+    border-radius: $border-radius-medium;
+    box-shadow: $box-shadow-light;
     animation: fadeIn 1s ease-in-out;
     &:hover {
       box-shadow: $box-shadow-dark;
     }
-    .scoreTable {
-      width: 100%;
-      border-radius: $border-radius-small;
-      overflow: hidden;
-      border-collapse: collapse; // Re-enabled for consistent borders
 
-      th,
-      td {
-        background-color: $background-color-light;
-        padding: $padding-small;
-        text-align: center;
+    .rulesHeading {
+      font-size: $font-size-heading;
+      color: $text-color-dark;
+      margin-bottom: $margin-regular;
+    }
+
+    .rulesList {
+      list-style-type: decimal;
+      padding-left: $padding-regular;
+
+      .ruleItem {
         font-size: $font-size-regular;
-        transition: background-color 0.3s;
-      }
-
-      th {
-        background-color: $background-color-dark;
-        color: $text-color-light;
-        border-bottom: 3px solid $background-accent;
-      }
-
-      th:first-child {
-        border-top-left-radius: $border-radius-large;
-      }
-
-      th:last-child {
-        border-top-right-radius: $border-radius-large;
-      }
-
-      td {
         color: $text-color-dark;
-      }
-
-      tr:nth-child(even) {
-        background-color: $background-accent;
-      }
-
-      tr:hover {
-        cursor: pointer;
-      }
-
-      tr:last-child td:first-child {
-        border-bottom-left-radius: $border-radius-large;
-      }
-      tr:last-child td:last-child {
-        border-bottom-right-radius: $border-radius-large;
+        margin-bottom: $margin-small;
       }
     }
   }

@@ -68,8 +68,8 @@ const signUp = catchAsync(
       email: req.body.email,
       password: req.body.password,
     });
+    // console.log(createSendToken(newplayer, 201, res));
     createSendToken(newplayer, 201, res);
-    console.log(createSendToken(newplayer, 201, res));
     // Send the token back to the client
   }
 );
@@ -92,10 +92,32 @@ const login = catchAsync(
     if (!player || !(await player.checkPassword(password, player.password!))) {
       return next(new AppError("Invalid email or password", 401));
     }
+    // console.log(player);
+    // Send the token back to the client
+    createSendToken(player, 200, res);
+  }
+);
+
+const getPlayer = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Extract email and password from the request body
+    const _id = req.params;
+    console.log(_id);
+    // Check if email and password are provided
+    if (!_id) {
+      return next(new AppError("Search for valid if not found player", 400));
+    }
+
+    // Find the player in the database and explicitly select the password field
+    const player = await Player.findById(_id);
+
+    if (!player) {
+      return next(new AppError("Search for valid player", 400));
+    }
     console.log(player);
     // Send the token back to the client
     createSendToken(player, 200, res);
   }
 );
 
-export { signUp, login };
+export { signUp, login, getPlayer };

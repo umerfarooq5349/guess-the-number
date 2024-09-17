@@ -95,7 +95,7 @@ $button-styles: (
     // box-shadow: $box-shadow-light,
     hover-background-color: $button-color-primary,
     hover-box-shadow: $box-shadow-dark,
-    active-background-color: $button-color-accent,
+    active-background-color: none,
     disabled-background-color: darken($button-color-accent, 5%),
     disabled-color: $text-color-light,
   ),
@@ -223,7 +223,7 @@ $hero-styles: (
     box-shadow $transition-speed $transition-ease;
   margin: $margin-small;
   &:hover {
-    background-color: map-get($styles, hover-background-color);
+    // background-color: map-get($styles, hover-background-color);
     cursor: pointer;
     box-shadow: map-get($styles, hover-box-shadow);
   }
@@ -235,6 +235,8 @@ $hero-styles: (
   &:disabled {
     background-color: map-get($styles, disabled-background-color);
     color: map-get($styles, disabled-color);
+    border: none;
+    box-shadow: none;
     cursor: not-allowed;
   }
 }
@@ -267,6 +269,10 @@ $hero-styles: (
 
   &::placeholder {
     color: map-get($styles, placeholder-color);
+  }
+  &:active,
+  &:focus {
+    border: 20px solid $border-color-dark;
   }
 }
 

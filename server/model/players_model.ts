@@ -58,7 +58,7 @@ const playerSchema = new mongoose.Schema<PlayerDocument, PlayerModel>({
   },
   photo: {
     type: String,
-    default: "image.jpg",
+    default: "/assets/avatar.png",
   },
 });
 

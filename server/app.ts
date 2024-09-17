@@ -6,8 +6,13 @@ import cookieParser from "cookie-parser";
 import gameRouter from "./routes/game";
 const app = Express();
 
+app.use((req, res, next) => {
+  const origin = req.get("origin"); // Get the Origin header
+  console.log(`Origin of the request: ${origin}`);
+  next();
+});
 const corsOptions = {
-  origin: process.env.CLIENT!, // Allow requests from this origin
+  origin: "http://localhost:3000", // Allow requests from this origin
   credentials: true, // Allow cookies to be sent
 };
 

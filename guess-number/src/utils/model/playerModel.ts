@@ -6,5 +6,6 @@ export interface PlayerModel {
   name: string;
   email: string;
   password: string;
+  photo: string;
   confirmPassword: string;
 }
