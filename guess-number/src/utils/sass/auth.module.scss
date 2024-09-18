@@ -95,13 +95,18 @@
   margin: $margin-regular;
 }
 
-.signupLink {
+.pageChange {
   color: $text-color-light;
   text-decoration: none; // Ensuring no underline by default
 }
 
-.signupLink:hover {
+.pageChange:hover {
   text-decoration: underline;
+
+  text-decoration-color: $border-color-light;
+
+  text-decoration-thickness: 2px;
+  text-underline-offset: $gap-small;
 }
 
 .formMessage {

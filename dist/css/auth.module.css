@@ -123,13 +123,16 @@
   margin: 16px;
 }
 
-.signupLink {
+.pageChange {
   color: #ecb365;
   text-decoration: none;
 }
 
-.signupLink:hover {
+.pageChange:hover {
   text-decoration: underline;
+  text-decoration-color: #ecb365;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
 }
 
 .formMessage {

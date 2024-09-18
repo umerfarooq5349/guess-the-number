@@ -4,8 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/utils/sass/auth.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signIn } from "next-auth/react"; // Corrected import
 
 interface LoginPageFormValues {
@@ -24,7 +24,7 @@ const LoginPage = () => {
     console.log(data);
 
     await signIn("credentials", {
-      redirect: false,
+      callbackUrl: "/",
       email: data.email,
       password: data.password,
     }).then((response) => {
@@ -37,28 +37,28 @@ const LoginPage = () => {
   };
 
   // Function for signing in with Google
-  const handleGoogleSignIn = async () => {
-    try {
-      await signIn("google");
-    } catch (error) {
-      console.error("Google Sign-in error:", error);
-    }
-  };
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await signIn("google", { callbackUrl: "/signin" });
+  //   } catch (error) {
+  //     console.error("Google Sign-in error:", error);
+  //   }
+  // };
 
-  // Function for signing in with Facebook
-  const handleFacebookSignIn = async () => {
-    try {
-      await signIn("facebook");
-    } catch (error) {
-      console.error("Facebook Sign-in error:", error);
-    }
-  };
+  // // Function for signing in with Facebook
+  // const handleFacebookSignIn = async () => {
+  //   try {
+  //     await signIn("facebook");
+  //   } catch (error) {
+  //     console.error("Facebook Sign-in error:", error);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <Image
-          src="/assets/background.jpg"
+          src="/assets/liz-gross-signup.gif"
           alt="Sign In"
           fill
           style={{ objectFit: "cover" }}
@@ -94,12 +94,12 @@ const LoginPage = () => {
         </button>
         <div className={styles.footerText}>
           Not a member yet?{" "}
-          <Link href="/signup" className={styles.signupLink}>
+          <Link href="/signup" className={styles.pageChange}>
             Sign Up
           </Link>
         </div>
 
-        <div className={styles.socialLogin}>
+        {/* <div className={styles.socialLogin}>
           <button
             type="button"
             className={styles.socialBtn}
@@ -114,7 +114,7 @@ const LoginPage = () => {
           >
             <FontAwesomeIcon icon={faFacebook} /> Sign in with Facebook
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

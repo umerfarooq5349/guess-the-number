@@ -42,13 +42,13 @@ const NavLinks = () => {
     });
   };
 
-  const pages = [{ title: "Home", route: "/" }];
+  // const pages = [{ title: "Home", route: "/" }];
 
   const renderLinks = () => (
     <>
-      {pages.map((link) => (
+      {/* {pages.map((link) => (
         <OneLink key={link.route} oneLink={link} />
-      ))}
+      ))} */}
       {isLoggedIn ? (
         <>
           <OneLink
@@ -70,7 +70,16 @@ const NavLinks = () => {
           </div>
         </>
       ) : (
-        <OneLink key="signin" oneLink={{ title: "Signin", route: "/signin" }} />
+        <div>
+          {/* <OneLink
+            key="signin"
+            oneLink={{ title: "Signin", route: "/signin" }}
+          />
+          <OneLink
+            key="signup"
+            oneLink={{ title: "SignUp", route: "/signup" }}
+          /> */}
+        </div>
       )}
     </>
   );

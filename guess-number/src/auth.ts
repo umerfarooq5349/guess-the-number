@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-
+// import { MongoDBAdapter } from "@auth/mongodb-adapter";
+// import client from "./lib/mongodb";
 import axios from "axios";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -42,9 +43,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  // pages: {
-  //   signIn: "/signin",
-  // },
+  pages: {
+    signIn: "/signin",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
@@ -53,14 +55,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user._id || user.id;
-        token.role = user.role || "user";
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id!.toString();
-      session.user.role = token.role!.toString();
+
       return session;
     },
   },
 });
+
+// export const config = {
+//   runtime: "nodejs", // Explicitly set Node.js runtime to avoid Edge runtime issues
+// };
+// export const runtime = "nodejs";
