@@ -60,6 +60,7 @@ const NavLinks = () => {
             key="highestScore"
             oneLink={{ title: "Highest Score", route: "/highestScore" }}
           />
+
           <OneLink
             key="profile"
             oneLink={{ title: "Profile", route: "/profile" }}

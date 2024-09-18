@@ -1,0 +1,112 @@
+@import "./theme/theme.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $border-color-accent;
+  border-radius: $border-radius-medium;
+  overflow: hidden;
+  width: 70%;
+  height: 70%;
+}
+
+.imageContainer {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  flex: 1;
+  background: $border-color-accent;
+  padding: $padding-regular;
+  border-radius: $border-radius-medium;
+}
+
+.title {
+  font-size: $font-size-large;
+  margin-bottom: $margin-small;
+  text-align: center;
+  color: $text-color-light;
+}
+
+.label {
+  display: block;
+  color: $text-color-light;
+  margin-bottom: $margin-small;
+}
+
+.input {
+  @include inputStyle(default);
+  //   margin: $margin-regular;
+  width: 100%;
+  outline: none; // Remove default outline
+
+  &:focus {
+    border: $border-color-accent;
+    box-shadow: $box-shadow-dark;
+    cursor: text;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &::placeholder {
+    color: $text-color-dark;
+  }
+}
+
+.error {
+  color: $danger-color;
+  font-size: $font-size-small;
+  display: block;
+  margin-top: $margin-small;
+}
+
+.submitBtn,
+.socialBtn {
+  @include buttonStyle(primary);
+  width: 100%;
+  background-color: $background-color-dark;
+  margin: $margin-small 0;
+  cursor: pointer; // Added cursor pointer for better UX
+}
+
+.socialLogin {
+  display: flex;
+  flex-direction: row;
+  gap: $margin-regular; // Added gap for spacing between social buttons
+}
+
+.footerText {
+  text-align: center;
+  color: $text-color-light;
+  margin: $margin-regular;
+}
+
+.signupLink {
+  color: $text-color-light;
+  text-decoration: none; // Ensuring no underline by default
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+.formMessage {
+  display: block;
+  text-align: center;
+  color: $text-color-light;
+  //   margin: $margin-large 0; // Adjust margin as needed
+}

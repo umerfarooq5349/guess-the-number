@@ -8,6 +8,7 @@
   background-color: #064663;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+  transition: box-shadow 0.3s ease-in-out;
 }
 .container:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -17,7 +18,7 @@
   justify-content: space-between;
   width: 100%;
   background-color: #041c32;
-  padding: 16px 16px;
+  padding: 16px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -26,15 +27,20 @@
   color: #ecb365;
   font-size: 16px;
 }
-.container .heading {
-  color: #041c32;
+.container .score-board .heading {
   font-size: 32px;
+  font-weight: bold;
+  color: #ecb365;
+  text-align: center;
 }
 .container .guess-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 .container .guess-body .description {
-  color: #041c32;
+  color: #ecb365;
   font-size: 16px;
   font-weight: bold;
   margin: 16px;
@@ -47,13 +53,19 @@
   border-radius: 8px;
   transition: border-color 0.3s ease-in-out;
   margin: 16px;
+  width: 100%;
+  outline: none;
 }
 .container .guess-body .input::placeholder {
   color: #0c5190;
 }
 .container .guess-body .input:active, .container .guess-body .input:focus {
-  outline: none;
+  border: 20px solid #041c32;
+}
+.container .guess-body .input:focus {
   border: #064663;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: text;
 }
 .container .guess-body .input::-webkit-outer-spin-button, .container .guess-body .input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -63,29 +75,28 @@
   color: #041c32;
 }
 .container .guess-body .button {
-  background-color: #041c32;
-  border: none;
+  background-color: transparent;
+  border: 2px solid #041c32;
   color: #ecb365;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   padding: 16px;
   border-radius: 12px;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   margin: 8px;
   width: 100%;
-  max-width: 200px;
   margin: 8px auto;
 }
 .container .guess-body .button:hover {
-  background-color: green;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .container .guess-body .button:active {
-  background-color: #064663;
+  background-color: none;
 }
 .container .guess-body .button:disabled {
   background-color: #05354b;
   color: #ecb365;
+  border: none;
+  box-shadow: none;
   cursor: not-allowed;
 }/*# sourceMappingURL=guess.module.css.map */
