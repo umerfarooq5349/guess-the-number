@@ -6,6 +6,7 @@ import styles from "@/utils/sass/auth.module.scss";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface SignUpFormValues {
   name: string;
@@ -57,7 +58,7 @@ const SignUp = () => {
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <Image
-          src="/assets/background.jpg"
+          src="/assets/liz-gross-signup.gif"
           alt="Sign Up"
           fill
           style={{ objectFit: "cover" }}
@@ -107,7 +108,14 @@ const SignUp = () => {
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
 
+        <div className={styles.footerText}>
+          Already a member?{" "}
+          <Link href="/signin" className={styles.pageChange}>
+            Sign In
+          </Link>
+        </div>
         {/* Display form submission message */}
+
         {formMessage && <div className={styles.formMessage}>{formMessage}</div>}
       </form>
     </div>

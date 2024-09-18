@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { auth } from "./auth";
 
+export const runtime = "nodejs";
+
 export async function middleware(request: NextRequest) {
   const session = await auth();
   const url = request.nextUrl;
@@ -34,22 +36,6 @@ export async function middleware(request: NextRequest) {
       redirectUrl.searchParams.set("message", "You are already logged in.");
       return NextResponse.redirect(redirectUrl);
     }
-
-    // Handle route access based on user role
-    // if (session.user.role === "user") {
-    //   if (url.pathname.startsWith("/dashbord")) {
-    //     // Redirect "user" role trying to access "dashboard" to "profile" with a message
-    //     const redirectUrl = new URL("/profile", request.url);
-    //     redirectUrl.searchParams.set(
-    //       "message",
-    //       "Dashboard is restricted. You have been redirected to your profile."
-    //     );
-    //     return NextResponse.redirect(redirectUrl);
-    //   }
-    // } else if (session.user.role === "admin") {
-    //   // Admins have access to all routes except "signin" and "signup"
-    //   return NextResponse.next();
-    // }
   }
 
   // Allow the request to proceed for all other cases
