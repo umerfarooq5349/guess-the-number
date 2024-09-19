@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 // import { MongoDBAdapter } from "@auth/mongodb-adapter";
 // import client from "./lib/mongodb";
 import axios from "axios";
+// import { connectToDb } from "./utils/lib/db";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   // adapter: MongoDBAdapter(client),
@@ -48,6 +49,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          // Call your server to handle Google user
+          const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER}/signinWithProviders`,
+            {
+              email: profile?.email,
+              name: profile?.name,
+              image: profile?.picture,
+            }
+          );
+          console.log(response);
+          if (response.status === 200) {
+            return true;
+          } else {
+            return false;
+          }
+        } catch (err) {
+          console.error("Error handling Google sign-in:", err);
+          return false;
+        }
+      }
+      return true;
+    },
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
       return !!auth;
