@@ -1,13 +1,33 @@
-import dontenv from "dotenv";
+import dotenv from "dotenv";
 import app from "./app";
-dontenv.config({ path: "./config.env" });
+import mongoose from "mongoose";
 
-import mongoose = require("mongoose");
-const port = process.env.PORT!;
-mongoose.connect(process.env.DATABASE_URL!).then(() => {
-  console.log("Connected to database");
-});
+// Load environment variables from config.env
+dotenv.config({ path: "./config.env" });
 
+// Get environment variables with type assertion
+const port = process.env.PORT;
+const dbUrl = process.env.DATABASE_URL;
+
+if (!port) {
+  throw new Error("PORT is not defined in environment variables");
+}
+
+if (!dbUrl) {
+  throw new Error("DATABASE_URL is not defined in environment variables");
+}
+
+// Connect to MongoDB
+mongoose
+  .connect(dbUrl)
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
+    console.error("Database connection error:", err);
+  });
+
+// Start the server
 app.listen(port, () => {
   console.log(
     `Server is running on port ${port} in ${process.env.NODE_ENV} environment`
