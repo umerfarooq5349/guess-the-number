@@ -12,7 +12,7 @@ app.use((req, res, next) => {
   next();
 });
 const corsOptions = {
-  origin: "http://localhost:3000", // Allow requests from this origin
+  origin: !process.env.CLIENT, // Allow requests from this origin
   credentials: true, // Allow cookies to be sent
 };
 
