@@ -1,0 +1,71 @@
+@import "./theme/theme.scss";
+
+.loader {
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: $margin-regular;
+
+  --d: 20px; // Default size
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  color: $highlight-color;
+  margin: 12px 0;
+
+  box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+    calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
+    calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
+    calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,
+    calc(-1 * var(--d)) calc(0 * var(--d)) 0 4px,
+    calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 5px,
+    calc(0 * var(--d)) calc(-1 * var(--d)) 0 6px;
+
+  animation: l27 1s infinite steps(8);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+
+  // For smaller screens (mobile)
+  @media (max-width: 600px) {
+    --d: 16px; // Smaller dots for mobile
+    width: 1px;
+    height: 1px;
+    box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+      calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 0.5px,
+      calc(0 * var(--d)) calc(1 * var(--d)) 0 1px,
+      calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 1.5px,
+      calc(-1 * var(--d)) calc(0 * var(--d)) 0 2px,
+      calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 2.5px,
+      calc(0 * var(--d)) calc(-1 * var(--d)) 0 3px;
+  }
+
+  // For medium screens (tablet)
+  @media (min-width: 601px) and (max-width: 1024px) {
+    --d: 18px; // Medium-sized dots for tablets
+    width: 1.5px;
+    height: 1.5px;
+    box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+      calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 0.75px,
+      calc(0 * var(--d)) calc(1 * var(--d)) 0 1.5px,
+      calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 2.25px,
+      calc(-1 * var(--d)) calc(0 * var(--d)) 0 3px,
+      calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 3.75px,
+      calc(0 * var(--d)) calc(-1 * var(--d)) 0 4.5px;
+  }
+
+  // For larger screens (desktop)
+  @media (min-width: 1025px) {
+    --d: 20px; // Default for larger screens
+    width: 4px;
+    height: 4px;
+  }
+}
+
+@keyframes l27 {
+  100% {
+    transform: rotate(1turn);
+  }
+}

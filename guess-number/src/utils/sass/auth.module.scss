@@ -9,6 +9,19 @@
   overflow: hidden;
   width: 70%;
   height: 70%;
+  max-width: 900px; // Maximum width to prevent it from getting too wide
+  max-height: 600px; // Set a maximum height
+
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack the image and form vertically
+    width: 90%; // Adjust width on tablets and below
+    height: auto; // Auto height for flexibility
+    max-width: 100%; // Ensure it doesn't exceed screen width
+  }
+
+  @media (max-width: 480px) {
+    padding: $padding-small;
+  }
 }
 
 .imageContainer {
@@ -16,6 +29,14 @@
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 200px; // Set height for image on smaller screens
+  }
+
+  @media (max-width: 480px) {
+    height: 150px;
+  }
 }
 
 .image {
@@ -29,6 +50,14 @@
   background: $border-color-accent;
   padding: $padding-regular;
   border-radius: $border-radius-medium;
+
+  @media (max-width: 768px) {
+    padding: $padding-small; // Smaller padding on tablets
+  }
+
+  @media (max-width: 480px) {
+    padding: $padding-small; // Smaller padding on mobile
+  }
 }
 
 .title {
@@ -36,19 +65,30 @@
   margin-bottom: $margin-small;
   text-align: center;
   color: $text-color-light;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-regular; // Reduce title size on tablets
+  }
+
+  @media (max-width: 480px) {
+    font-size: $font-size-small; // Further reduce title size on mobile
+  }
 }
 
 .label {
   display: block;
   color: $text-color-light;
   margin-bottom: $margin-small;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-small;
+  }
 }
 
 .input {
   @include inputStyle(default);
-  //   margin: $margin-regular;
   width: 100%;
-  outline: none; // Remove default outline
+  outline: none;
 
   &:focus {
     border: $border-color-accent;
@@ -65,13 +105,10 @@
   &::placeholder {
     color: $text-color-dark;
   }
-}
 
-.error {
-  color: $danger-color;
-  font-size: $font-size-small;
-  display: block;
-  margin-top: $margin-small;
+  @media (max-width: 480px) {
+    font-size: $font-size-small; // Smaller font for inputs on mobile
+  }
 }
 
 .submitBtn,
@@ -80,38 +117,55 @@
   width: 100%;
   background-color: $background-color-dark;
   margin: $margin-small 0;
-  cursor: pointer; // Added cursor pointer for better UX
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    margin: $margin-small;
+  }
+
+  @media (max-width: 480px) {
+    font-size: $font-size-small;
+  }
 }
 
 .socialLogin {
   display: flex;
   flex-direction: row;
-  gap: $margin-regular; // Added gap for spacing between social buttons
+  gap: $margin-regular;
+
+  @media (max-width: 480px) {
+    flex-direction: column; // Stack social buttons on small screens
+  }
 }
 
 .footerText {
   text-align: center;
   color: $text-color-light;
   margin: $margin-regular;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-small; // Adjust footer text size on tablets
+  }
+
+  @media (max-width: 480px) {
+    margin: $margin-small;
+  }
 }
 
 .pageChange {
   color: $text-color-light;
-  text-decoration: none; // Ensuring no underline by default
-}
+  text-decoration: none;
 
-.pageChange:hover {
-  text-decoration: underline;
-
-  text-decoration-color: $border-color-light;
-
-  text-decoration-thickness: 2px;
-  text-underline-offset: $gap-small;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: $border-color-light;
+    text-decoration-thickness: 2px;
+    text-underline-offset: $gap-small;
+  }
 }
 
 .formMessage {
   display: block;
   text-align: center;
   color: $text-color-light;
-  //   margin: $margin-large 0; // Adjust margin as needed
 }

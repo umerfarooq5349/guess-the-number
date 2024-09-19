@@ -1,4 +1,5 @@
 "use client";
+import BikeAnimiation from "@/components/loaders/bikeAnimiation";
 import styles from "@/utils/sass/highestScore.module.scss";
 import axios from "axios";
 import Link from "next/link";
@@ -52,7 +53,7 @@ const HighestScorePage = () => {
       <div className={styles.tableWrapper}>
         <div className={styles.tableContainer}>
           {loading ? (
-            <p>Loading...</p>
+            <BikeAnimiation />
           ) : error ? (
             <p>{error}</p>
           ) : (
