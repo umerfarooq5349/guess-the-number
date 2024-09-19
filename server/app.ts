@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 const corsOptions = {
-  origin: !process.env.CLIENT, // Allow requests from this origin
+  origin: true, // Allow requests from this origin
   credentials: true, // Allow cookies to be sent
 };
 
