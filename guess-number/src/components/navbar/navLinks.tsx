@@ -71,14 +71,14 @@ const NavLinks = () => {
         </>
       ) : (
         <div>
-          {/* <OneLink
+          <OneLink
             key="signin"
             oneLink={{ title: "Signin", route: "/signin" }}
           />
           <OneLink
             key="signup"
             oneLink={{ title: "SignUp", route: "/signup" }}
-          /> */}
+          />
         </div>
       )}
     </>

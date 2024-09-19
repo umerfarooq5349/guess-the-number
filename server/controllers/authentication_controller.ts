@@ -25,7 +25,7 @@ const createSendToken = (
   statusCode: number,
   res: Response
 ): void => {
-  const token = signToken(player._id);
+  const token = signToken(player._id as string);
 
   const cookieOptions = {
     expires: new Date(
@@ -120,4 +120,37 @@ const getPlayer = catchAsync(
   }
 );
 
-export { signUp, login, getPlayer };
+const signinWithProviders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Extract email and password from the request body
+    const { email, name, image } = req.body;
+
+    if (!email) {
+      return next(new AppError("Email is required", 400));
+    }
+    try {
+      // Check if the user exists
+      let player = await Player.findOne({ email });
+
+      if (!player) {
+        // Create a new player if not found
+        player = new Player({
+          name,
+          email,
+          image, // Assuming you want to store the image URL
+        });
+
+        await player.save();
+      }
+
+      console.log(player);
+      createSendToken(player, 200, res);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+    // Send the token back to the client
+  }
+);
+
+export { signUp, login, getPlayer, signinWithProviders };
