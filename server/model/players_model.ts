@@ -30,7 +30,7 @@ const playerSchema = new mongoose.Schema<PlayerDocument, PlayerModel>({
   },
   password: {
     type: String,
-    // required: [true, "Password is required"],
+    required: [true, "Password is required"],
     minlength: [8, "Password must be at least 8 characters long"],
     select: false,
   },
