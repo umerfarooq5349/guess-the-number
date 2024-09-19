@@ -3,10 +3,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import styles from "@/utils/sass/auth.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import Circularloader from "@/components/loaders/circularloader";
 
 interface SignUpFormValues {
   name: string;
@@ -24,7 +26,19 @@ const SignUp = () => {
   // State for managing form submission status
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
 
+  useEffect(() => {
+    if (searchParams.get("message")) {
+      toast.error(searchParams.get("message"), {
+        position: "top-right",
+        style: {
+          transition: "all 0.5s ease-in-out",
+        },
+        icon: "⚠",
+      });
+    }
+  });
   const router = useRouter();
 
   // Function to handle sign-up logic
@@ -105,7 +119,13 @@ const SignUp = () => {
         </label>
 
         <button type="submit" className={styles.submitBtn} disabled={loading}>
-          {loading ? "Signing Up..." : "Sign Up"}
+          {loading ? (
+            <div>
+              <Circularloader />
+            </div>
+          ) : (
+            "Sign Up"
+          )}
         </button>
 
         <div className={styles.footerText}>

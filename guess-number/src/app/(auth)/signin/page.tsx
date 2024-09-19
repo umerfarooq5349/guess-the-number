@@ -7,6 +7,10 @@ import styles from "@/utils/sass/auth.module.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signIn } from "next-auth/react"; // Corrected import
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Circularloader from "@/components/loaders/circularloader";
 
 interface LoginPageFormValues {
   email: string;
@@ -19,10 +23,23 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginPageFormValues>();
+  const searchParams = useSearchParams();
+  const [isLoading, setIsloading] = useState(false);
 
+  useEffect(() => {
+    if (searchParams.get("message")) {
+      toast.success(searchParams.get("message"), {
+        position: "top-right",
+        style: {
+          transition: "all 0.5s ease-in-out",
+        },
+        icon: "⚠",
+      });
+    }
+  });
   const onSubmit: SubmitHandler<LoginPageFormValues> = async (data) => {
     console.log(data);
-
+    setIsloading(true);
     await signIn("credentials", {
       callbackUrl: "/",
       email: data.email,
@@ -33,6 +50,7 @@ const LoginPage = () => {
       } else {
         console.log("Sign in successful");
       }
+      setIsloading(false);
     });
   };
 
@@ -90,7 +108,13 @@ const LoginPage = () => {
           )}
         </label>
         <button type="submit" className={styles.submitBtn}>
-          Sign In
+          {isLoading ? (
+            <div>
+              <Circularloader />
+            </div>
+          ) : (
+            "Sign In"
+          )}
         </button>
         <div className={styles.footerText}>
           Not a member yet?{" "}

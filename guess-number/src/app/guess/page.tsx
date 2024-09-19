@@ -8,6 +8,7 @@ import { generateRandomNumbers } from "@/utils/generateRandomNumber";
 import styles from "@/utils/sass/guess.module.scss";
 import FlashMessage from "@/components/flashMessages/flashMessage";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const NumberGuessingGame = () => {
   const [width, height] = useWindowSize();
@@ -41,8 +42,9 @@ const NumberGuessingGame = () => {
             const errorMessage =
               error.response?.data?.message ||
               "Failed to fetch high score. Please try again later.";
-            setMessage(errorMessage);
-            setMessageType("error");
+            // setMessage(errorMessage);
+            toast.error(errorMessage, { position: "top-right", icon: "😑" });
+            // setMessageType("error");
           }
         }
       }
@@ -54,8 +56,8 @@ const NumberGuessingGame = () => {
   useEffect(() => {
     const message = new URLSearchParams(window.location.search).get("message");
     if (message) {
+      toast.error(message, { position: "top-right", icon: "😑" });
       setMessage(message);
-      setMessageType("default");
     }
   }, [setMessage, setMessageType]);
 
