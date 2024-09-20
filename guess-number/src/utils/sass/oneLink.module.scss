@@ -4,43 +4,64 @@
   @include linkStyle(default);
   color: $text-color-light;
   margin: $margin-small $margin-regular;
-  padding: $padding-small 0;
+  padding: 0; // Remove padding around the text
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; // Centering vertically
-
-  // &:hover {
-  //   color: $text-color-accent;
-  // }
+  display: inline-block; // Make it inline to fit the text width
+  text-align: right; // Align text to the right
 
   &::before {
     content: " ";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 0%;
+    bottom: -2px; // Slightly below the text
+    right: 0; // Position it on the right
+    height: 2px; // Thin underline
+    width: 0%; // Start with no width
     background-color: $link-hover-color;
-    transition: width 300ms ease-in-out; // Smooth hover transition
+    transition: width 300ms ease-in-out; // Smooth transition for hover effect
+
+    @media (max-width: 768px) {
+      height: 1px; // Thinner for smaller screens
+    }
   }
 
   &:hover::before {
-    width: 100%; // Expand to full width on hover
+    width: 100%; // Expand to full text width from right to left
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    margin: $margin-small $margin-small;
+    padding: 0; // Remove padding for better mobile view
+  }
+
+  @media (max-width: 480px) {
+    font-size: $font-size-small; // Smaller font on very small screens
+    padding: 0; // Remove padding
   }
 }
 
 .activate {
-  padding: $padding-small;
-  position: relative; // Ensure the underline can be positioned properly
+  padding: 0; // Remove extra padding
+  position: relative;
   box-shadow: $box-shadow-light;
+
   &::before {
     content: " ";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%; // Underline should always be 100% width
+    bottom: -2px; // Slightly below the text
+    right: 0; // Position it on the right
+    height: 2px; // Full width underline
+    width: 100%; // Full width when active
     background-color: $link-hover-color;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0; // Adjust padding for smaller screens
+    box-shadow: none; // Remove or lighten the shadow on mobile for simpler design
+  }
+
+  @media (max-width: 480px) {
+    padding: 0; // Minimize padding for smaller screens
+    font-size: $font-size-small; // Decrease font size for readability on small screens
   }
 }

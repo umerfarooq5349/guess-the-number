@@ -1,6 +1,7 @@
 .navbarContainer {
   display: flex;
   width: 100%;
+  margin: 16px 0;
   font-weight: bold;
   justify-content: center;
 }
@@ -34,6 +35,10 @@
   .menuButton:active {
     color: #e69d38;
   }
+  .menuButton .icon {
+    color: #ecb365;
+    cursor: pointer;
+  }
   .smallScreen {
     width: 50%;
     position: fixed;
@@ -41,11 +46,11 @@
     right: 0;
     bottom: 0;
     display: flex;
-    background-color: black;
+    background-color: rgba(6, 70, 99, 0.4117647059);
     flex-direction: column;
     justify-content: center;
     text-align: end;
     z-index: 999;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
   }
 }/*# sourceMappingURL=navLinks.module.css.map */

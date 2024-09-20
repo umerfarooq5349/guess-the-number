@@ -3,12 +3,11 @@ import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import axios, { AxiosError } from "axios";
 import { useWindowSize } from "@react-hook/window-size";
-import { useFlashMessage } from "@/context/flashMessageContext";
 import { generateRandomNumbers } from "@/utils/generateRandomNumber";
 import styles from "@/utils/sass/guess.module.scss";
-import FlashMessage from "@/components/flashMessages/flashMessage";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import Circularloader from "@/components/loaders/circularloader";
 
 const NumberGuessingGame = () => {
   const [width, height] = useWindowSize();
@@ -16,14 +15,13 @@ const NumberGuessingGame = () => {
   const [highScore, setHighScore] = useState(0);
   const [userGuess, setUserGuess] = useState("");
   const [lastGuess, setLastGuess] = useState("");
-  const [attemptsLeft, setAttemptsLeft] = useState(10);
+  const [attemptsLeft, setAttemptsLeft] = useState(5);
   const [currentScore, setCurrentScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isGuessing, setIsGuessing] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showPlayAgain, setShowPlayAgain] = useState(false);
 
-  const { setMessage, setMessageType } = useFlashMessage();
   const { data: session } = useSession();
   const [playerId, setPlayerId] = useState("");
 
@@ -42,9 +40,7 @@ const NumberGuessingGame = () => {
             const errorMessage =
               error.response?.data?.message ||
               "Failed to fetch high score. Please try again later.";
-            // setMessage(errorMessage);
             toast.error(errorMessage, { position: "top-right", icon: "😑" });
-            // setMessageType("error");
           }
         }
       }
@@ -57,22 +53,23 @@ const NumberGuessingGame = () => {
     const message = new URLSearchParams(window.location.search).get("message");
     if (message) {
       toast.error(message, { position: "top-right", icon: "😑" });
-      setMessage(message);
     }
-  }, [setMessage, setMessageType]);
+  }, []);
 
   const handleGuess = async () => {
+    setIsGuessing(true);
     if (isGuessing || userGuess === lastGuess) {
+      setIsGuessing(false);
       return;
     }
 
-    setIsGuessing(true);
-
     const guess = parseInt(userGuess);
 
-    if (isNaN(guess) || guess < 1 || guess > 100 || gameOver) {
-      setMessage("Please enter a valid number between 1 and 100.");
-      setMessageType("error");
+    if (isNaN(guess) || guess < 1 || guess > 10 || gameOver) {
+      toast.error("Please enter a valid number between 1 and 10", {
+        position: "top-right",
+        icon: "😐",
+      });
       setIsGuessing(false);
       return;
     }
@@ -81,8 +78,10 @@ const NumberGuessingGame = () => {
 
     if (guess === targetNumber) {
       const finalScore = attemptsLeft * 10;
-      setMessage("Congratulations! You guessed it right!");
-      setMessageType("success");
+      toast.success("Congratulations! You guessed it right!", {
+        position: "top-right",
+        icon: "🎉",
+      });
       setCurrentScore(finalScore);
       setShowConfetti(true);
 
@@ -96,8 +95,7 @@ const NumberGuessingGame = () => {
           const errorMessage =
             error.response?.data?.message ||
             "Failed to update high score. Please try again later.";
-          setMessage(errorMessage);
-          setMessageType("error");
+          toast.error(errorMessage, { position: "top-right", icon: "😞" });
         }
       }
 
@@ -109,12 +107,16 @@ const NumberGuessingGame = () => {
       setGameOver(true);
     } else {
       setAttemptsLeft((prev) => prev - 1);
-      setMessage(guess < targetNumber ? "Too low!" : "Too high!");
-      setMessageType("error");
+      toast.error(guess < targetNumber ? "Too low!" : "Too high!", {
+        position: "top-right",
+        icon: "🤔",
+      });
 
       if (attemptsLeft - 1 === 0) {
-        setMessage(`Game over! The correct number was ${targetNumber}`);
-        setMessageType("error");
+        toast.error(`Game over! The correct number was ${targetNumber}`, {
+          position: "top-right",
+          icon: "😔",
+        });
         setGameOver(true);
         setShowPlayAgain(true);
       }
@@ -127,7 +129,7 @@ const NumberGuessingGame = () => {
     setTargetNumber(generateRandomNumbers());
     setUserGuess("");
     setLastGuess("");
-    setAttemptsLeft(10);
+    setAttemptsLeft(5);
     setCurrentScore(0);
     setGameOver(false);
     setShowConfetti(false);
@@ -136,7 +138,6 @@ const NumberGuessingGame = () => {
 
   return (
     <div className={styles.container}>
-      <FlashMessage />
       {showConfetti && <Confetti width={width} height={height} />}
       <div className={styles["score-board"]}>
         <h1 className={styles["heading"]}>Guess the Number</h1>
@@ -150,12 +151,12 @@ const NumberGuessingGame = () => {
       </div>
 
       <div className={styles["guess-body"]}>
-        <p className={styles.description}>Guess the number between 1 and 100</p>
+        <p className={styles.description}>Guess the number between 1 and 10</p>
         <input
           type="number"
           value={userGuess}
           onChange={(e) => setUserGuess(e.target.value)}
-          disabled={gameOver}
+          disabled={gameOver || isGuessing}
           placeholder="Enter your guess"
           className={styles.input}
         />
@@ -166,7 +167,7 @@ const NumberGuessingGame = () => {
           }
           className={styles.button}
         >
-          Guess
+          {isGuessing ? <Circularloader /> : "Guess"}
         </button>
 
         {gameOver && showPlayAgain && (
