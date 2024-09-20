@@ -1,5 +1,7 @@
 import { NextPage } from "next";
-import styles from "@/utils/sass/Footer.module.scss"; // Assuming this is the correct path
+import styles from "@/utils/sass/footer.module.scss"; // Assuming this is the correct path
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {}
 
@@ -11,7 +13,6 @@ const Footer: NextPage<Props> = () => {
           className={`${styles.bg_links} ${styles.social} ${styles.portfolio}`}
           href="https://www.rafaelalucas.com"
           target="_blank"
-          rel="noopener noreferrer"
         >
           <span className={styles.icon}></span>
         </a>
@@ -27,11 +28,15 @@ const Footer: NextPage<Props> = () => {
           className={`${styles.bg_links} ${styles.social} ${styles.linkedin}`}
           href="https://www.linkedin.com/in/rafaelalucas/"
           target="_blank"
-          rel="noopener noreferrer"
         >
           <span className={styles.icon}></span>
         </a>
-        <a className={styles.bg_links}></a>
+        <FontAwesomeIcon
+          icon={faAddressCard}
+          size="3x"
+          // href="https://www.linkedin.com/in/rafaelalucas/"
+          className={`${styles.bg_links} ${styles.logo}`}
+        />
       </div>
     </div>
   );
