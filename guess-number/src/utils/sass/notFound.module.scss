@@ -1,0 +1,126 @@
+@import "./theme/theme.scss";
+
+.container {
+  height: 70vh;
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba($background-accent, 0.4),
+    rgba($background-alt, 0.4)
+  );
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(50px); // Blur for the container
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); // Added shadow for depth
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; // Circles behind everything
+
+    // Circles stacked on top of each other
+    .circle1,
+    .circle2,
+    .circle3 {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba($highlight-color, 0.6);
+      z-index: 0;
+      animation: wiggle 6s infinite;
+      filter: blur(10px); // Blur effect for the circles
+    }
+
+    .circle1 {
+      bottom: 20%; // Positioned in the bottom left
+      left: 10%;
+      width: 20vw; // Responsive width
+      height: 20vw; // Responsive height
+      transform: translateZ(-1px);
+    }
+
+    .circle2 {
+      top: 50%; // Positioned in the middle
+      left: 50%;
+      width: 25vw; // Responsive width
+      height: 25vw; // Responsive height
+      transform: translate(-50%, -50%) translateZ(0px); // Centering adjustment
+    }
+
+    .circle3 {
+      bottom: 20%; // Positioned in the bottom right
+      right: 10%;
+      width: 20vw; // Responsive width
+      height: 20vw; // Responsive height
+      transform: translateZ(0px);
+    }
+  }
+
+  .parallax {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $text-color-light;
+    perspective: 1px;
+
+    .title {
+      font-size: $font-size-hero;
+      z-index: 2; // Above circles
+      color: black; // Updated title color to black
+      text-shadow: $box-shadow-dark;
+      transform: translateZ(1px);
+    }
+
+    .subtitle {
+      font-size: $font-size-large;
+      margin: 1rem 0;
+      z-index: 3;
+      color: $background-color-dark;
+      font-weight: bold;
+      transform: translateZ(0.5px);
+      line-height: 1.5; // Improved line height for readability
+    }
+
+    .backButton {
+      @include buttonStyle(primary);
+      z-index: 3;
+      background-color: $background-color-dark;
+      color: $text-color-light;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      &:hover {
+        color: $text-color-light;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  20% {
+    transform: translate(calc(-50% + 10px), calc(-50% + 10px)) rotate(5deg);
+  }
+  40% {
+    transform: translate(calc(-50% - 10px), calc(-50% - 10px)) rotate(-5deg);
+  }
+  60% {
+    transform: translate(calc(-50% + 10px), calc(-50% - 10px)) rotate(5deg);
+  }
+  80% {
+    transform: translate(calc(-50% - 5px), calc(-50% + 5px)) rotate(-2deg);
+  }
+}

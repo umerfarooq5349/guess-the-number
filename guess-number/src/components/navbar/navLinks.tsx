@@ -7,7 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 
 import React from "react";
 import Swal from "sweetalert2";
-import { faBars, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavLinks = () => {
@@ -46,25 +46,32 @@ const NavLinks = () => {
 
   const renderLinks = () => (
     <>
-      {pages.map((link) => (
-        <OneLink key={link.route} oneLink={link} />
-      ))}
+      <div>
+        {pages.map((link) => (
+          <OneLink key={link.route} oneLink={link} />
+        ))}
+      </div>
       {isLoggedIn ? (
         <>
-          <OneLink
-            key="rules"
-            oneLink={{ title: "Game Rules", route: "/rules" }}
-          />
+          <div>
+            <OneLink
+              key="profile"
+              oneLink={{ title: "Profile", route: "/profile" }}
+            />
+          </div>
+          <div>
+            <OneLink
+              key="rules"
+              oneLink={{ title: "Game Rules", route: "/rules" }}
+            />
+          </div>
+          <div>
+            <OneLink
+              key="highestScore"
+              oneLink={{ title: "Highest Score", route: "/highestScore" }}
+            />
+          </div>
 
-          <OneLink
-            key="highestScore"
-            oneLink={{ title: "Highest Score", route: "/highestScore" }}
-          />
-
-          <OneLink
-            key="profile"
-            oneLink={{ title: "Profile", route: "/profile" }}
-          />
           <div onClick={handleLogout} role="button" tabIndex={0}>
             <OneLink key="logout" oneLink={{ title: "Logout", route: "" }} />
           </div>
@@ -85,15 +92,19 @@ const NavLinks = () => {
         onClick={() => setOpen((prev) => !prev)}
         aria-pressed={open}
       >
-        {open ? (
-          <FontAwesomeIcon icon={faBars} />
+        {!open ? (
+          <FontAwesomeIcon icon={faBars} size="2x" className={styles.icon} />
         ) : (
-          <FontAwesomeIcon icon={faBoxOpen} />
+          <FontAwesomeIcon icon={faXmark} size="2x" className={styles.icon} />
         )}
       </button>
 
       {/* Mobile navbar */}
-      {open && <div className={styles.smallScreen}>{renderLinks()}</div>}
+      {open && (
+        <div className={`${styles.smallScreen} ${open ? styles.open : ""}`}>
+          {renderLinks()}
+        </div>
+      )}
     </div>
   );
 };

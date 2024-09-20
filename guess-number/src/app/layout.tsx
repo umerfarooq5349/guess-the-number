@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar/navbar";
 import { FlashMessageProvider } from "@/context/flashMessageContext";
 import AuthProvider from "../context/authProviderContext";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/footer/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +38,7 @@ export default function RootLayout({
                 <Toaster />
                 <NavBar></NavBar>
                 {children}
-                <div></div>
+                <Footer />
               </FlashMessageProvider>
             </AuthProvider>
           </div>

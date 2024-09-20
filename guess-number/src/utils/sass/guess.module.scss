@@ -10,10 +10,23 @@
   background-color: $background-alt;
   box-shadow: $box-shadow-light;
   border-radius: $border-radius-large;
-  transition: box-shadow 0.3s ease-in-out; // Smooth transition for hover effect
+  transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
     box-shadow: $box-shadow-dark;
+  }
+
+  // Responsive breakpoints
+  @media (max-width: 768px) {
+    width: 90vw;
+    height: auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 100vw;
+    height: auto;
+    margin: 200px;
+    padding: $padding-small;
   }
 
   .score-board {
@@ -26,9 +39,21 @@
     border-top-right-radius: $border-radius-large;
     box-shadow: $box-shadow-dark;
 
+    @media (max-width: 768px) {
+      flex-direction: row;
+
+      align-items: center;
+      text-align: center;
+    }
+
     .score-item {
       color: $text-color-light;
       font-size: $font-size-regular;
+      margin: $margin-small;
+
+      @media (max-width: 768px) {
+        font-size: $font-size-small;
+      }
     }
 
     .heading {
@@ -36,6 +61,10 @@
       font-weight: bold;
       color: $text-color-light;
       text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: $font-size-regular;
+      }
     }
   }
 
@@ -44,19 +73,28 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: $padding-regular;
+
+    @media (max-width: 768px) {
+      padding: $padding-small;
+    }
 
     .description {
       color: $text-color-light;
       font-size: $font-size-regular;
       font-weight: bold;
       margin: $margin-regular;
+
+      @media (max-width: 768px) {
+        font-size: $font-size-small;
+      }
     }
 
     .input {
       @include inputStyle(default);
       margin: $margin-regular;
       width: 100%;
-      outline: none; // Remove default outline
+      outline: none;
 
       &:focus {
         border: $border-color-accent;
@@ -73,13 +111,21 @@
       &::placeholder {
         color: $text-color-dark;
       }
+
+      @media (max-width: 768px) {
+        font-size: $font-size-small;
+      }
     }
 
     .button {
       @include buttonStyle(primary);
       width: 100%;
-      // max-width: 200px;
       margin: $margin-small auto;
+
+      @media (max-width: 768px) {
+        font-size: $font-size-small;
+        padding: $padding-small;
+      }
     }
   }
 }

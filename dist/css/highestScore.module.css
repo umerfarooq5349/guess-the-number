@@ -68,37 +68,45 @@
 }
 .container .tableContainer .scoreTable th,
 .container .tableContainer .scoreTable td {
-  background-color: #ecb365;
   padding: 8px;
   text-align: center;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 .container .tableContainer .scoreTable th {
   background-color: #041c32;
   color: #ecb365;
-  border-bottom: 3px solid #04293a;
+  border-bottom: 1px solid #ecb365;
 }
-.container .tableContainer .scoreTable th:first-child {
-  border-top-left-radius: 12px;
-}
-.container .tableContainer .scoreTable th:last-child {
-  border-top-right-radius: 12px;
-}
-.container .tableContainer .scoreTable td {
+.container .tableContainer .scoreTable tr:nth-child(even) td {
+  background-color: #ecb365;
   color: #041c32;
 }
-.container .tableContainer .scoreTable tr:nth-child(even) {
+.container .tableContainer .scoreTable tr:nth-child(odd) td {
+  background-color: #041c32;
+  color: #ecb365;
+}
+.container .tableContainer .scoreTable tr:hover td {
   background-color: #04293a;
+  color: #ecb365;
+}
+.container .tableContainer .scoreTable tr {
+  color: #041c32;
 }
 .container .tableContainer .scoreTable tr:hover {
-  cursor: pointer;
+  background: linear-gradient(-45deg, #04293a, #064663);
+}
+.container .tableContainer .scoreTable th:first-child {
+  border-top-left-radius: 8px;
+}
+.container .tableContainer .scoreTable th:last-child {
+  border-top-right-radius: 8px;
 }
 .container .tableContainer .scoreTable tr:last-child td:first-child {
-  border-bottom-left-radius: 12px;
+  border-bottom-left-radius: 8px;
 }
 .container .tableContainer .scoreTable tr:last-child td:last-child {
-  border-bottom-right-radius: 12px;
+  border-bottom-right-radius: 8px;
 }
 
 @keyframes fadeIn {

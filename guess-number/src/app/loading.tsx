@@ -1,5 +1,7 @@
+import BikeAnimiation from "@/components/loaders/bikeAnimiation";
+
 const Loading = () => {
-  return <div>This is custome loading page</div>;
+  return <BikeAnimiation />;
 };
 
 export default Loading;
