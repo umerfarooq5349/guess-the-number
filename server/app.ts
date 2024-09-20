@@ -8,11 +8,12 @@ const app = Express();
 
 app.use((req, res, next) => {
   const origin = req.get("origin"); // Get the Origin header
-  console.log(`Origin of the request: ${origin}`);
+  console.log(`client is on ${process.env.CLIENT} 
+  Origin of the request: ${origin}`);
   next();
 });
 const corsOptions = {
-  origin: !process.env.CLIENT, // Allow requests from this origin
+  origin: true, // Allow requests from this origin
   credentials: true, // Allow cookies to be sent
 };
 
