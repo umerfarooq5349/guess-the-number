@@ -11,7 +11,7 @@ import axios from "axios";
 const dummyPlayer = {
   name: "John Doe",
   email: "john.doe@example.com",
-  photo: "/assets/picofme.png", // Use a placeholder image if needed
+  photo: "/assets/avatar.png", // Use a placeholder image if needed
   highestScore: 500,
   scores: [
     { value: 200, date: new Date().toLocaleDateString() },
