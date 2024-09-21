@@ -1,4 +1,5 @@
 import styles from "@/utils/sass/rules.module.scss";
+
 import Link from "next/link";
 
 const RulesPage = () => {
@@ -6,7 +7,7 @@ const RulesPage = () => {
     <div className={styles.container}>
       <div className={styles.containerHeading}>
         <div className={styles.subHead}>Guess the Number</div>
-        <div className={styles.subHead}>Game Rules</div>
+
         <div className={`${styles.subHead} ${styles.playAgainBtn}`}>
           <Link href="/">Play Game</Link>
         </div>

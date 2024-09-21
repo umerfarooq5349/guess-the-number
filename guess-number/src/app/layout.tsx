@@ -6,6 +6,7 @@ import { FlashMessageProvider } from "@/context/flashMessageContext";
 import AuthProvider from "../context/authProviderContext";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,6 +39,7 @@ export default function RootLayout({
                 <Toaster />
                 <NavBar></NavBar>
                 {children}
+                <Analytics />
                 <Footer />
               </FlashMessageProvider>
             </AuthProvider>
