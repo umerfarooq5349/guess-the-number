@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 80vh;
   width: 80vw;
   background-color: $background-alt;
   box-shadow: $box-shadow-light;
@@ -23,9 +22,7 @@
   }
 
   @media (max-width: 480px) {
-    width: 100vw;
-    height: auto;
-    margin: 200px;
+    width: 95vw;
     padding: $padding-small;
   }
 
@@ -41,9 +38,13 @@
 
     @media (max-width: 768px) {
       flex-direction: row;
-
       align-items: center;
       text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      padding: $padding-small;
+      box-shadow: none;
     }
 
     .score-item {
@@ -65,6 +66,10 @@
       @media (max-width: 768px) {
         font-size: $font-size-regular;
       }
+
+      @media (max-width: 480px) {
+        font-size: $font-size-small;
+      }
     }
   }
 
@@ -79,6 +84,10 @@
       padding: $padding-small;
     }
 
+    @media (max-width: 480px) {
+      padding: $padding-small;
+    }
+
     .description {
       color: $text-color-light;
       font-size: $font-size-regular;
@@ -87,6 +96,11 @@
 
       @media (max-width: 768px) {
         font-size: $font-size-small;
+      }
+
+      @media (max-width: 480px) {
+        font-size: $font-size-small;
+        margin: $margin-small;
       }
     }
 
@@ -115,6 +129,10 @@
       @media (max-width: 768px) {
         font-size: $font-size-small;
       }
+
+      @media (max-width: 480px) {
+        font-size: $font-size-small;
+      }
     }
 
     .button {
@@ -123,6 +141,11 @@
       margin: $margin-small auto;
 
       @media (max-width: 768px) {
+        font-size: $font-size-small;
+        padding: $padding-small;
+      }
+
+      @media (max-width: 480px) {
         font-size: $font-size-small;
         padding: $padding-small;
       }
