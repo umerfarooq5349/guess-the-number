@@ -9,7 +9,7 @@
     "dev": "nodemon server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Umer Farooq",
   "license": "ISC",
   "description": "",
   "dependencies": {

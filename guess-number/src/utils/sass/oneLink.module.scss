@@ -12,12 +12,12 @@
   &::before {
     content: " ";
     position: absolute;
-    bottom: -2px; // Slightly below the text
-    right: 0; // Position it on the right
-    height: 2px; // Thin underline
-    width: 0%; // Start with no width
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 0%;
     background-color: $link-hover-color;
-    transition: width 300ms ease-in-out; // Smooth transition for hover effect
+    transition: width 300ms ease-in-out;
 
     @media (max-width: 768px) {
       height: 1px; // Thinner for smaller screens

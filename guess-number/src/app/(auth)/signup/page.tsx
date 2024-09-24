@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import styles from "@/utils/sass/auth.module.scss";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -55,14 +55,15 @@ const SignUp = () => {
 
       if (response.status) {
         console.log(response.data);
-        setFormMessage(
-          "Sign up successful! Please check your email to confirm."
-        );
+        setFormMessage("Sign up successful!");
         router.replace("/signin");
       }
     } catch (error) {
-      console.log(`Error: ${error}`);
-      setFormMessage("An error occurred during sign-up. Please try again.");
+      if (error instanceof AxiosError) {
+        console.error(error.response?.data);
+        // setFormMessage(error.response?.data.message);
+        setFormMessage("Sign up failed!");
+      }
     } finally {
       setLoading(false);
     }
@@ -70,15 +71,6 @@ const SignUp = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <Image
-          src="/assets/liz-gross-signup.gif"
-          alt="Sign Up"
-          fill
-          style={{ objectFit: "cover" }}
-          className={styles.image}
-        />
-      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <h2 className={styles.title}>Sign Up</h2>
 
@@ -110,7 +102,14 @@ const SignUp = () => {
           Password
           <input
             type="password"
-            {...register("password", { required: "Password is required" })}
+            {...register("password", {
+              required: "Password is required",
+
+              minLength: {
+                value: 8,
+                message: "Password must contain 8 characters",
+              },
+            })}
             className={styles.input}
           />
           {errors.password && (
@@ -138,6 +137,15 @@ const SignUp = () => {
 
         {formMessage && <div className={styles.formMessage}>{formMessage}</div>}
       </form>
+      <div className={styles.imageContainer}>
+        <Image
+          src="/assets/liz-gross-signup.gif"
+          alt="Sign Up"
+          fill
+          style={{ objectFit: "cover" }}
+          className={styles.image}
+        />
+      </div>
     </div>
   );
 };
