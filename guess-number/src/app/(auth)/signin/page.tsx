@@ -100,7 +100,13 @@ const LoginPage = () => {
           Password
           <input
             type="password"
-            {...register("password", { required: "Password is required" })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must contain 8 characters",
+              },
+            })}
             className={styles.input}
           />
           {errors.password && (

@@ -9,6 +9,7 @@ import React from "react";
 import Swal from "sweetalert2";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { usePathname } from "next/navigation";
 
 const NavLinks = () => {
   const [open, setOpen] = useState(false);
@@ -43,14 +44,18 @@ const NavLinks = () => {
   };
 
   const pages = [{ title: "Home", route: "/" }];
-
+  const path = usePathname();
   const renderLinks = () => (
     <>
-      <div>
-        {pages.map((link) => (
-          <OneLink key={link.route} oneLink={link} />
-        ))}
-      </div>
+      {path === "/signin" || path == "/signup" ? (
+        <div></div>
+      ) : (
+        <div>
+          {pages.map((link) => (
+            <OneLink key={link.route} oneLink={link} />
+          ))}
+        </div>
+      )}
       {isLoggedIn ? (
         <>
           <div>
