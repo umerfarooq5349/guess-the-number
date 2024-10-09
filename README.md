@@ -9,10 +9,8 @@ Welcome to the Guess the Number game! This application is designed to provide a 
 
 1. [Technologies Used](#technologies-used)
 2. [Features](#features)
-3. [Setup Instructions](#setup-instructions)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [License](#license)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
 
 ## Technologies Used
 
@@ -31,7 +29,7 @@ Welcome to the Guess the Number game! This application is designed to provide a 
 
 ## 🚀 Play Now!
 
-Ready to test your skills? Play the game here: [Guess the Number Game](#)
+Ready to test your skills? Play the game here: [Guess the Number Game](https://guess-the-number-tau-nine.vercel.app/)
 
 
 ## Usage
