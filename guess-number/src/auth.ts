@@ -1,43 +1,41 @@
+import axios from "axios";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-// import { MongoDBAdapter } from "@auth/mongodb-adapter";
-// import client from "./lib/mongodb";
-import axios from "axios";
-// import { connectToDb } from "./utils/lib/db";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  // adapter: MongoDBAdapter(client),
   providers: [
     Google,
     Credentials({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "jsmith@gmail.com",
-        },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        // Ensure credentials has email and password
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+
         try {
-          let user = null;
           const response = await axios.post(
             `${process.env.NEXT_PUBLIC_SERVER}/signin`,
             {
-              email: credentials?.email,
-              password: credentials?.password,
+              email,
+              password,
             }
           );
 
-          user = response.data.data.player;
+          const user = response.data.data.player;
 
-          if (response.status === 200 && response.data.data.player) {
+          if (response.status === 200 && user) {
             return user;
-          } else {
-            return null;
           }
+
+          // If no user found, return null
+          return null;
         } catch (error) {
           throw new Error("Invalid credentials");
         }
@@ -49,25 +47,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
-      return !!auth;
-    },
+    // JWT callback to store user id in the token
     async jwt({ token, user }) {
       if (user) {
         token.id = user._id || user.id;
       }
       return token;
     },
+    // Session callback to check if the user exists in the DB
     async session({ session, token }) {
-      session.user.id = token.id!.toString();
+      try {
+        // Fetch the user from your server/database
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER}/getPlayer/${token.id}`
+        );
 
-      return session;
+        const userExists = response.data;
+
+        // If the user does not exist, invalidate the session
+        if (!userExists) {
+          return session.user.undefined;
+        }
+
+        // Set the session user ID if the user exists
+        session.user.id = token.id!.toString();
+        return session;
+      } catch (error) {
+        return undefined;
+      }
     },
   },
 });
-
-// export const config = {
-//   runtime: "nodejs", // Explicitly set Node.js runtime to avoid Edge runtime issues
-// };
-// export const runtime = "nodejs";
