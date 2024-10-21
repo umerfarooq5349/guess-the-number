@@ -26,6 +26,7 @@ const NumberGuessingGame = () => {
   const [playerId, setPlayerId] = useState("");
 
   useEffect(() => {
+    console.log(session);
     const fetchHighScore = async () => {
       if (session?.user) {
         const currentPlayerId = session.user.id;

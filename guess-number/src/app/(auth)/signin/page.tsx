@@ -7,7 +7,7 @@ import styles from "@/utils/sass/auth.module.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { signIn } from "next-auth/react"; // Corrected import
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Circularloader from "@/components/loaders/circularloader";
@@ -25,7 +25,8 @@ const LoginPage = () => {
   } = useForm<LoginPageFormValues>();
   const searchParams = useSearchParams();
   const [isLoading, setIsloading] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
   useEffect(() => {
     if (searchParams.get("message")) {
       toast.success(searchParams.get("message"), {
@@ -38,20 +39,22 @@ const LoginPage = () => {
     }
   });
   const onSubmit: SubmitHandler<LoginPageFormValues> = async (data) => {
-    console.log(data);
     setIsloading(true);
-    await signIn("credentials", {
-      callbackUrl: "/",
+    setErrorMessage(""); // Reset error message before trying
+
+    const response = await signIn("credentials", {
       email: data.email,
       password: data.password,
-    }).then((response) => {
-      if (response?.error) {
-        console.error("Error:", response.error);
-      } else {
-        console.log("Sign in successful");
-      }
-      setIsloading(false);
+      redirect: false,
     });
+
+    if (response?.error) {
+      setErrorMessage("Invalid credentials");
+    } else {
+      router.push("/"); // Redirect if successful
+    }
+
+    setIsloading(false);
   };
 
   // Function for signing in with Google
@@ -122,6 +125,10 @@ const LoginPage = () => {
             "Sign In"
           )}
         </button>
+        <div className={styles.footerText}>
+          {errorMessage && <span>{errorMessage}</span>}
+        </div>
+
         <div className={styles.footerText}>
           Not a member yet?{" "}
           <Link href="/signup" className={styles.pageChange}>
